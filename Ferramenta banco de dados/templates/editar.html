@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Editar item | PaleoIFMA</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo" href="/">PALEOIFMA</a>
+
+        <div class="menu">
+            <a href="/">Início</a>
+            <a href="/registrar">Registrar</a>
+            <a class="perigo" href="/deletar/{{ item.id }}">Excluir item</a>
+        </div>
+    </nav>
+
+    <main class="conteudo">
+        <h1 class="titulo">Editar item</h1>
+        <p class="subtitulo">Atualize as informações do item selecionado.</p>
+
+        <section class="caixa">
+            <form action="" method="post">
+                <label for="nomeForm">Item</label>
+                <input
+                    type="text"
+                    id="nomeForm"
+                    name="nomeForm"
+                    value="{{ item.nome }}"
+                    required
+                >
+
+                <label for="especificacaoForm">Especificação</label>
+                <textarea
+                    id="especificacaoForm"
+                    name="especificacaoForm"
+                    required
+                >{{ item.especificacao }}</textarea>
+
+                <label for="categoria_id">Categoria</label>
+                <select name="categoria_id" id="categoria_id" required>
+                    {% for categoria in categorias %}
+                        <option
+                            value="{{ categoria.id }}"
+                            {% if categoria.id == item.categoria_id %}selected{% endif %}
+                        >
+                            {{ categoria.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button class="botao" type="submit">Salvar alterações</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

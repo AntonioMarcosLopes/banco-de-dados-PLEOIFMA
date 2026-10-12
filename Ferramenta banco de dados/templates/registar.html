@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Registrar item | PaleoIFMA</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo" href="/">PALEOIFMA</a>
+
+        <div class="menu">
+            <a href="/">Início</a>
+            <a href="/registrar">Registrar</a>
+        </div>
+    </nav>
+
+    <main class="conteudo">
+        <h1 class="titulo">Registrar item</h1>
+        <p class="subtitulo">Adicione um novo item ao acervo.</p>
+
+        <section class="caixa">
+            <form action="" method="post">
+                <label for="nomeForm">Item</label>
+                <input type="text" id="nomeForm" name="nomeForm" required>
+
+                <label for="especificacaoForm">Especificação</label>
+                <textarea
+                    id="especificacaoForm"
+                    name="especificacaoForm"
+                    required
+                ></textarea>
+
+                <label for="categoria_id">Categoria</label>
+                <select name="categoria_id" id="categoria_id" required>
+                    <option value="">Selecione uma categoria</option>
+
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}">
+                            {{ categoria.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button class="botao" type="submit">Registrar item</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

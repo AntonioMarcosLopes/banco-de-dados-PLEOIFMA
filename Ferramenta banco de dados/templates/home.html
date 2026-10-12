@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>PaleoIFMA</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo" href="/">PALEOIFMA</a>
+
+        <div class="menu">
+            <a href="/">Início</a>
+            <a href="/registrar">Registrar</a>
+        </div>
+    </nav>
+
+    <main class="conteudo">
+        <h1 class="titulo">Acervo Paleontológico</h1>
+        <p class="subtitulo">Itens cadastrados no PaleoIFMA</p>
+
+        {% if itens %}
+            <section class="lista-itens">
+                {% for item in itens %}
+                    <article class="item">
+                        <h2>{{ item.nome }}</h2>
+
+                        <span class="categoria">
+                            {{ item.categoria.nome }}
+                        </span>
+
+                        <p>{{ item.especificacao }}</p>
+
+                        <div class="acoes">
+                            <a class="editar" href="/editar/{{ item.id }}">
+                                Editar
+                            </a>
+
+                            <a class="deletar" href="/deletar/{{ item.id }}">
+                                Deletar
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </section>
+        {% else %}
+            <p class="vazio">Nenhum item foi registrado ainda.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
